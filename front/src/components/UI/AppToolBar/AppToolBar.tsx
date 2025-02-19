@@ -7,8 +7,6 @@ import { useAppSelector } from '../../../store/hooks.ts';
 import { selectUser } from '../../../features/Users/usersSlice.ts';
 import UserMenu from './UserMenu.tsx';
 
-
-
 const AppToolBar = () => {
   const user = useAppSelector(selectUser);
   const navigate = useNavigate();

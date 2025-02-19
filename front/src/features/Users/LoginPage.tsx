@@ -2,12 +2,11 @@ import { Alert, Avatar, Box, Button, Container, Grid2, TextField, Typography } f
 import { useState } from 'react';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { ILoginMutation } from '../../types';
-import {signInThunk } from './usersThunk.ts';
+import { signInThunk } from './usersThunk.ts';
 
 import { selectLoginError } from './usersSlice.ts';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks.ts';
-
 
 const initialState = {
   email: '',

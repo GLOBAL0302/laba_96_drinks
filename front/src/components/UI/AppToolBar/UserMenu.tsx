@@ -13,12 +13,11 @@ export interface Props {
 }
 
 const UserMenu: React.FC<Props> = ({ user }) => {
-
   console.log(user.avatar);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  let pic:string = '';
+  let pic: string = '';
 
   if (user.avatar) {
     pic = apiUrl + '/' + user.avatar;
@@ -45,13 +44,15 @@ const UserMenu: React.FC<Props> = ({ user }) => {
         <Typography mr={2} variant="body2" component="p" color="inherit">
           Welcome
         </Typography>
-        <strong style={{ textDecoration: 'underline' }}>{user.displayName}</strong>
-        <CardMedia
-          component="img"
-          image={pic}
-          style={{ width: '100px', height: '100px' }}
-          title={user.displayName}
-        />
+        <strong
+          style={{
+            textDecoration: 'underline',
+            marginRight: '30px',
+          }}
+        >
+          {user.displayName}
+        </strong>
+        <CardMedia component="img" image={pic} style={{ width: '80px', height: '80px' }} title={user.displayName} />
       </Button>
       <Menu anchorEl={anchorEl} onClose={handleClose} keepMounted open={Boolean(anchorEl)}>
         <MenuItem onClick={() => navigate('/trackHistory')}>My Play History</MenuItem>
