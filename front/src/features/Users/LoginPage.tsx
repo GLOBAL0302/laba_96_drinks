@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks.ts';
 
 
 const initialState = {
-  username: '',
+  email: '',
   password: '',
 };
 
@@ -82,11 +82,11 @@ const LoginPage = () => {
               <Grid2 size={12}>
                 <TextField
                   onChange={handleChange}
-                  value={userForm.username}
-                  name="username"
+                  value={userForm.email}
+                  name="email"
                   fullWidth
-                  id="username"
-                  label="Username"
+                  id="email"
+                  label="email"
                 />
               </Grid2>
               <Grid2 size={12}>

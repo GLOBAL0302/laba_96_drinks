@@ -3,13 +3,15 @@ import LiquorIcon from '@mui/icons-material/Liquor';
 
 import { useNavigate } from 'react-router-dom';
 import AnonymousMenu from './AnounymousMenu.tsx';
+import { useAppSelector } from '../../../store/hooks.ts';
+import { selectUser } from '../../../features/Users/usersSlice.ts';
+import UserMenu from './UserMenu.tsx';
 
 
 
 const AppToolBar = () => {
-
+  const user = useAppSelector(selectUser);
   const navigate = useNavigate();
-
   const goToMainPage = () => {
     navigate('/');
   };
@@ -23,7 +25,7 @@ const AppToolBar = () => {
           <Typography onClick={goToMainPage} variant="h6" component="div" sx={{ flexGrow: 1, cursor: 'pointer' }}>
             Cocktails
           </Typography>
-          <AnonymousMenu/>
+          {user ? <UserMenu user={user} /> : <AnonymousMenu />}
         </Toolbar>
       </AppBar>
     </Box>
