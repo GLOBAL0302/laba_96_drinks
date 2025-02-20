@@ -12,7 +12,7 @@ const userPersistConfig = {
 
 const rootReducer = combineReducers({
   users: persistReducer(userPersistConfig, usersReducer),
-  cocktails:cocktailsReducer
+  cocktails: cocktailsReducer,
 });
 
 export const store = configureStore({

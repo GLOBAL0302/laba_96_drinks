@@ -8,7 +8,7 @@ interface CocktailsState {
   cocktailsSubmitting: boolean;
 }
 
-const initialState:CocktailsState = {
+const initialState: CocktailsState = {
   cocktails: [],
   cocktailLoading: false,
   cocktailsSubmitting: false,
@@ -31,12 +31,11 @@ const cocktailsSlice = createSlice({
       });
   },
   selectors: {
-    selectCocktails: (state => state.cocktails),
-    selectCocktailsLoading: (state => state.cocktailLoading),
-    selectCocktailsSubmitting: (state => state.cocktailsSubmitting),
+    selectCocktails: (state) => state.cocktails,
+    selectCocktailsLoading: (state) => state.cocktailLoading,
+    selectCocktailsSubmitting: (state) => state.cocktailsSubmitting,
   },
 });
-
 
 export const cocktailsReducer = cocktailsSlice.reducer;
 export const { selectCocktails, selectCocktailsSubmitting, selectCocktailsLoading } = cocktailsSlice.selectors;

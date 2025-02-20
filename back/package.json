@@ -5,6 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.ts",
+    "seed": "ts-node fixtures.ts",
     "format": "npx prettier . --write",
     "format:check": "npx prettier . --check"
   },

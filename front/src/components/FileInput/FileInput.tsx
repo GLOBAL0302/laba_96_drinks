@@ -31,7 +31,7 @@ const FileInput: React.FC<Props> = ({ name, onGetFile, label }) => {
       <input name={name} type="file" ref={inputRef} onChange={onFileChange} style={{ display: 'none' }} />
       <Grid2 container alignItems="center" gap={2}>
         <Grid2>
-          <TextField  disabled label={label} value={fileName} onChange={activeInput} />
+          <TextField disabled label={label} value={fileName} onChange={activeInput} />
         </Grid2>
         <Grid2>
           <Button variant={'contained'} color="primary" onClick={activeInput}>
