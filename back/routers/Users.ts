@@ -10,6 +10,7 @@ usersRouter.post(
   '/register',
   imagesUpload.single('avatar'),
   async (req: express.Request, res: express.Response, next) => {
+
     try {
       const user = new User({
         email: req.body.email,
@@ -18,6 +19,7 @@ usersRouter.post(
         password: req.body.password,
         role: 'user',
       });
+
 
       user.generateToken();
       await user.save();

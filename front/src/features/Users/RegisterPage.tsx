@@ -85,8 +85,8 @@ const RegisterPage = () => {
                   fullWidth
                   id="email"
                   label="email"
-                  error={Boolean(getFieldError('username'))}
-                  helperText={getFieldError('username')}
+                  error={Boolean(getFieldError('email'))}
+                  helperText={getFieldError('email')}
                 />
               </Grid2>
               <Grid2 size={12}>

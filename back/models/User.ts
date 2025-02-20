@@ -10,6 +10,7 @@ interface IUserMethods {
 
 type UserModel = Model<IUserField, {}, IUserMethods>;
 
+const regEmail = /^(\w+[-.]?\w+)@(\w+)([.-]?\w+)?(\.[a-zA-Z]{2,3})$/;
 const Schema = mongoose.Schema;
 const SALT_WORK_FACTORY = 10;
 
@@ -18,14 +19,23 @@ const UserSchema = new Schema<HydratedDocument<IUserField>, UserModel, IUserMeth
     type: String,
     required: true,
     unique: true,
-    validate: {
-      validator: async function (this: HydratedDocument<IUserField>, value: string): Promise<boolean> {
-        if (!this.isModified('email')) return true;
-        const user: IUserField | null = await User.findOne({ email: value });
-        return !user;
+    validate: [
+      {
+        validator: async function (this: HydratedDocument<IUserField>, value: string): Promise<boolean> {
+          if (!this.isModified('email')) return true;
+          const user: IUserField | null = await User.findOne({ email: value });
+          return !user;
+        },
+        message: 'This email is already taken',
       },
-      message: 'This email is already taken.',
-    },
+      {
+        validator: async function (this: HydratedDocument<IUserField>, value: string): Promise<boolean> {
+          if (!this.isModified('email')) return true;
+          return regEmail.test(value)
+        },
+        message: 'Incorrect email format',
+      }
+    ]
   },
   displayName: String,
   avatar: String,
@@ -66,6 +76,7 @@ UserSchema.methods.generateToken = async function () {
 UserSchema.methods.checkPassword = async function (password: string) {
   return await bcrypt.compare(password, this.password);
 };
+
 
 const User = mongoose.model('User', UserSchema);
 export default User;
