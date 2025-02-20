@@ -12,10 +12,10 @@ const App = () => {
     <>
       <AppToolBar />
       <Routes>
-        <Route path="/" element={<Cocktails />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/addCocktail" element={<AddCocktails />} />
+        <Route path="/cocktails" element={<Cocktails />} />
         <Route path="/*" element={<h2>No page exist</h2>} />
       </Routes>
       <ToastContainer />

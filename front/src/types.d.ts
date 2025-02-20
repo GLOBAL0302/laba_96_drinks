@@ -27,7 +27,7 @@ export interface ILoginMutation {
 
 //Cocktails
 export interface ICocktails {
-  id: string;
+  _id: string;
   user: string;
   title: string;
   ingredients: {
@@ -36,6 +36,7 @@ export interface ICocktails {
   }[];
   recipe: string;
   image: string | null;
+  isPublished: boolean;
 }
 
 export interface ICocktailMutation {

@@ -6,9 +6,12 @@ import auth, { RequestWithUser } from '../middleware/auth';
 
 const cocktailsRouter = express.Router();
 
-cocktailsRouter.get('/', async (req, res, next) => {
+cocktailsRouter.get('/', auth, async (req, res, next) => {
   try {
-    const cocktails = await Cocktail.find();
+    const expressReq = req as RequestWithUser;
+    const user = expressReq.user;
+
+    const cocktails = await Cocktail.find({ user: user._id });
     res.status(200).send(cocktails);
   } catch (error) {
     if (error instanceof Error) {

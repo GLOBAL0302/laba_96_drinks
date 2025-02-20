@@ -39,21 +39,21 @@ const run = async () => {
       title: 'Manhattan',
       recipe:
         'Fill a medium liquid measuring cup or mixing glass with ice. Add bourbon and vermouth and stir until well chilled.Strain into a (preferably frosty) coupe glass. Garnish with cherries and a few dashes of bitters.',
-      image: 'fixture/manhattan.png',
+      image: 'fixtures/manhattan.png',
       ingredients: [
         { title: 'Bourbon', amount: '2 oz.' },
         { title: 'sweet vermouth', amount: '1 oz.' },
         { title: '2 maraschino cherry (preferably Luxardo)', amount: '2' },
         { title: 'Ice', amount: '2 cubes' },
       ],
-      isPublished: false,
+      isPublished: true,
     },
     {
       user: user,
       title: 'Mimosa',
       recipe:
         'Divide juice between 6 champagne flutes (2 ounces each), then top each with champagne. Garnish each with a slice of orange if desired.',
-      image: 'fixture/mimosa.png',
+      image: 'fixtures/mimosa.png',
       ingredients: [
         { title: 'freshly squeezed orange juice', amount: '12 oz.' },
         { title: 'bottle chilled dry Champagne,', amount: '1 (750-ml.)' },

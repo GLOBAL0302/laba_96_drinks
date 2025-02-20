@@ -1,6 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ITest } from '../../types';
+import { ICocktails, ITest } from '../../types';
 import { axiosApi } from '../../axiosApi.ts';
+
+export const fetchAllCocktailsThunk = createAsyncThunk<ICocktails[], void>('cocktails/fetchAllCocktails', async () => {
+  const response = await axiosApi.get('/cocktails');
+  return response.data;
+});
 
 export const submitCocktailThunk = createAsyncThunk<void, ITest>(
   'cocktails/submitCocktailThunk',
@@ -13,7 +18,6 @@ export const submitCocktailThunk = createAsyncThunk<void, ITest>(
       }
     });
 
-    console.log(formData);
     const response = await axiosApi.post('/cocktails', formData);
     return response.data;
   },
