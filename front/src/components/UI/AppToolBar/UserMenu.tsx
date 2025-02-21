@@ -13,15 +13,17 @@ export interface Props {
 }
 
 const UserMenu: React.FC<Props> = ({ user }) => {
-  console.log(user.avatar);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   let pic: string = '';
 
   if (user.avatar) {
-    pic = apiUrl + '/' + user.avatar;
-    console.log(pic);
+    if (user.googleId) {
+      pic = user.avatar;
+    } else {
+      pic = apiUrl + '/' + user.avatar;
+    }
   }
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -55,7 +57,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
         <CardMedia component="img" image={pic} style={{ width: '80px', height: '80px' }} title={user.displayName} />
       </Button>
       <Menu anchorEl={anchorEl} onClose={handleClose} keepMounted open={Boolean(anchorEl)}>
-        <MenuItem onClick={() => navigate('/cocktails')}>My Cocktails</MenuItem>
+        <MenuItem onClick={() => navigate('/myCocktails')}>My Cocktails</MenuItem>
         <MenuItem onClick={() => navigate('/addCocktail')}>Add Cocktails</MenuItem>
         <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
       </Menu>

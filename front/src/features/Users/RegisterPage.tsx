@@ -2,12 +2,13 @@ import { Avatar, Box, Button, Container, Grid2, TextField, Typography } from '@m
 import { useState } from 'react';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import { IRegisterMutation } from '../../types';
-import { signUpUserThunk } from './usersThunk.ts';
+import { googleLogin, signUpUserThunk } from './usersThunk.ts';
 
 import { selectRegisterError } from './usersSlice.ts';
 import { NavLink, useNavigate } from 'react-router-dom';
 import FileInput from '../../components/FileInput/FileInput.tsx';
 import { useAppDispatch, useAppSelector } from '../../store/hooks.ts';
+import { GoogleLogin } from '@react-oauth/google';
 
 const initialState = {
   email: '',
@@ -58,6 +59,11 @@ const RegisterPage = () => {
     }
   };
 
+  const googleLoginHandler = async (credential: string) => {
+    await dispatch(googleLogin(credential)).unwrap();
+    navigate('/');
+  };
+
   return (
     <>
       <Container component="main" maxWidth="xs">
@@ -75,6 +81,17 @@ const RegisterPage = () => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          <Box sx={{ pt: 2 }}>
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                console.log(credentialResponse);
+                if (credentialResponse.credential) {
+                  void googleLoginHandler(credentialResponse.credential);
+                }
+              }}
+              onError={() => alert('Login failed with credential response: ')}
+            />
+          </Box>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid2 container direction={'column'} size={12} spacing={2}>
               <Grid2 size={12}>

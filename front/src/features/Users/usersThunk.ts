@@ -14,8 +14,9 @@ import { axiosApi } from '../../axiosApi.ts';
 export const googleLogin = createAsyncThunk<IUser, string, { rejectValue: IGlobalError }>(
   'user/googleLogin',
   async (credential, { rejectWithValue }) => {
+    console.log(credential);
     try {
-      const response = await axiosApi.post('/users/google', { credential });
+      const response = await axiosApi.post('users/google', { credential });
       return response.data.user;
     } catch (error) {
       if (isAxiosError(error) && error.response && error.response.status === 400) {

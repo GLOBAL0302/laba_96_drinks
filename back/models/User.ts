@@ -31,11 +31,11 @@ const UserSchema = new Schema<HydratedDocument<IUserField>, UserModel, IUserMeth
       {
         validator: async function (this: HydratedDocument<IUserField>, value: string): Promise<boolean> {
           if (!this.isModified('email')) return true;
-          return regEmail.test(value)
+          return regEmail.test(value);
         },
         message: 'Incorrect email format',
-      }
-    ]
+      },
+    ],
   },
   displayName: String,
   avatar: String,
@@ -76,7 +76,6 @@ UserSchema.methods.generateToken = async function () {
 UserSchema.methods.checkPassword = async function (password: string) {
   return await bcrypt.compare(password, this.password);
 };
-
 
 const User = mongoose.model('User', UserSchema);
 export default User;

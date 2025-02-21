@@ -2,11 +2,12 @@ import { Alert, Avatar, Box, Button, Container, Grid2, TextField, Typography } f
 import { useState } from 'react';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { ILoginMutation } from '../../types';
-import { signInThunk } from './usersThunk.ts';
+import { googleLogin, signInThunk } from './usersThunk.ts';
 
 import { selectLoginError } from './usersSlice.ts';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks.ts';
+import { GoogleLogin } from '@react-oauth/google';
 
 const initialState = {
   email: '',
@@ -38,10 +39,10 @@ const LoginPage = () => {
     }
   };
 
-  // const googleLoginHandler = async (credential: string) => {
-  //   await dispatch(googleLogin(credential)).unwrap();
-  //   navigate('/');
-  // };
+  const googleLoginHandler = async (credential: string) => {
+    await dispatch(googleLogin(credential)).unwrap();
+    navigate('/');
+  };
 
   return (
     <>
@@ -66,16 +67,16 @@ const LoginPage = () => {
             </Alert>
           )}
 
-          {/*<Box sx={{ pt: 2 }}>*/}
-          {/*  <GoogleLogin*/}
-          {/*    onSuccess={(credentialResponse) => {*/}
-          {/*      if (credentialResponse.credential) {*/}
-          {/*        void googleLoginHandler(credentialResponse.credential);*/}
-          {/*      }*/}
-          {/*    }}*/}
-          {/*    onError={() => alert('Login failed with credential response: ')}*/}
-          {/*  />*/}
-          {/*</Box>*/}
+          <Box sx={{ pt: 2 }}>
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                if (credentialResponse.credential) {
+                  void googleLoginHandler(credentialResponse.credential);
+                }
+              }}
+              onError={() => alert('Login failed with credential response: ')}
+            />
+          </Box>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid2 container direction={'column'} size={12} spacing={2}>
               <Grid2 size={12}>

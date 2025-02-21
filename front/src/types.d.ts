@@ -6,6 +6,7 @@ export interface IUser {
   token: string;
   displayName: string;
   avatar: string;
+  googleId: string;
 }
 
 export interface IRegisterResponse {
