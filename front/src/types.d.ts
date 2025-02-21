@@ -6,6 +6,7 @@ export interface IUser {
   token: string;
   displayName: string;
   avatar: string;
+  role: string;
   googleId: string;
 }
 
@@ -32,6 +33,7 @@ export interface ICocktails {
   user: string;
   title: string;
   ingredients: {
+    _id: string;
     title: string;
     amount: string;
   }[];

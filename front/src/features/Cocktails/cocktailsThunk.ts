@@ -1,9 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ICocktails, ITest } from '../../types';
 import { axiosApi } from '../../axiosApi.ts';
+import { RootState } from '../../store/app.ts';
 
-export const fetchAllCocktailsThunk = createAsyncThunk<ICocktails[], void>('cocktails/fetchAllCocktails', async () => {
-  const response = await axiosApi.get('/cocktails');
+export const fetchAllCocktailsThunk = createAsyncThunk<
+  ICocktails[],
+  void,
+  {
+    state: RootState;
+  }
+>('cocktails/fetchAllCocktails', async (_arg, thunkAPI) => {
+  let response;
+  let role = thunkAPI.getState().users?.user?.role;
+  response = await axiosApi.get(`/cocktails?role=${role}`);
   return response.data;
 });
 
@@ -22,3 +31,7 @@ export const submitCocktailThunk = createAsyncThunk<void, ITest>(
     return response.data;
   },
 );
+
+export const deleteOneCocktailThunk = createAsyncThunk<void, string>('cocktails/deleteOne', async (id) => {
+  await axiosApi.delete(`/cocktails/${id}`);
+});

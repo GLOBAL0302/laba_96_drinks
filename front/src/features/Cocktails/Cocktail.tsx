@@ -1,8 +1,9 @@
 import { ICocktails } from '../../types';
 import { apiUrl } from '../../GlobalConstant.ts';
-import { Button, CardMedia, Grid2, Typography } from '@mui/material';
+import { Box, Button, CardMedia, Grid2, Typography } from '@mui/material';
 import CheckSharpIcon from '@mui/icons-material/CheckSharp';
 import ScheduleSharpIcon from '@mui/icons-material/ScheduleSharp';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   cocktail: ICocktails;
@@ -10,13 +11,14 @@ interface Props {
 
 const Cocktail: React.FC<Props> = ({ cocktail }) => {
   let cockTailPic = '';
+  const navigate = useNavigate();
 
   if (cocktail.image) {
     cockTailPic = apiUrl + '/' + cocktail.image;
   }
 
   return (
-    <Grid2>
+    <Grid2 sx={{ cursor: 'pointer' }} onClick={() => navigate(`/oneCocktailPage/${cocktail._id}`)}>
       <CardMedia
         component="img"
         sx={{
@@ -25,11 +27,13 @@ const Cocktail: React.FC<Props> = ({ cocktail }) => {
         }}
         image={cockTailPic}
       />
-      {cocktail.isPublished ? (
-        <Button color="success" endIcon={<CheckSharpIcon />} />
-      ) : (
-        <Button color="warning" endIcon={<ScheduleSharpIcon />} />
-      )}
+      <Box textAlign="center">
+        {cocktail.isPublished ? (
+          <Button color="success" endIcon={<CheckSharpIcon />} />
+        ) : (
+          <Button color="warning" endIcon={<ScheduleSharpIcon />} />
+        )}
+      </Box>
       <Typography textAlign="center" variant="h5" sx={{ mb: 1 }}>
         {cocktail.title}
       </Typography>

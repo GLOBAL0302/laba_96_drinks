@@ -1,6 +1,6 @@
 import { IGlobalError, IUser, IValidationError } from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
-import { googleLogin, signInThunk, signUpUserThunk } from './usersThunk.ts';
+import { googleLogin, signInThunk, signUpUserThunk } from './usersThunk';
 
 interface UsersState {
   user: IUser | null;

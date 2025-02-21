@@ -10,8 +10,10 @@ cocktailsRouter.get('/', auth, async (req, res, next) => {
   try {
     const expressReq = req as RequestWithUser;
     const user = expressReq.user;
+    const { role } = req.query;
 
-    const cocktails = await Cocktail.find({ user: user._id });
+    const filter = role === 'admin' ? {} : { user: user._id };
+    const cocktails = await Cocktail.find(filter);
     res.status(200).send(cocktails);
   } catch (error) {
     if (error instanceof Error) {
@@ -24,9 +26,7 @@ cocktailsRouter.get('/', auth, async (req, res, next) => {
 cocktailsRouter.post('/', imagesUpload.single('image'), auth, async (req, res, next) => {
   let expressReq = req as RequestWithUser;
   const user = expressReq.user;
-
   const parsedIngredients = JSON.parse(req.body.ingredients);
-
   try {
     const newCocktail = new Cocktail({
       user: user._id,
@@ -36,7 +36,6 @@ cocktailsRouter.post('/', imagesUpload.single('image'), auth, async (req, res, n
       recipe: req.body.recipe,
       isPublished: false,
     });
-    console.log(newCocktail);
     await newCocktail.save();
     res.status(200).send({
       message: 'Cocktails created successfully.',
@@ -48,6 +47,21 @@ cocktailsRouter.post('/', imagesUpload.single('image'), auth, async (req, res, n
     }
   }
   next();
+});
+
+cocktailsRouter.delete('/:id', auth, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const deletedCocktail = await Cocktail.deleteOne({ _id: id });
+    console.log(deletedCocktail);
+    res.status(200).send({ message: 'Cocktails deleted successfully.', deletedCocktail });
+  } catch (error) {
+    if (error instanceof Error.ValidationError) {
+      res.status(400).send(error);
+    }
+    next(error);
+  }
 });
 
 export default cocktailsRouter;

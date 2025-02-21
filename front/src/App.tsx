@@ -6,6 +6,7 @@ import RegisterPage from './features/Users/RegisterPage.tsx';
 import Cocktails from './features/Cocktails/Cocktails.tsx';
 import AddCocktails from './features/Cocktails/AddCocktails.tsx';
 import { ToastContainer } from 'react-toastify';
+import OneCocktailPage from './features/Cocktails/OneCocktailPage.tsx';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/addCocktail" element={<AddCocktails />} />
         <Route path="/myCocktails" element={<Cocktails />} />
+        <Route path="/oneCocktailPage/:id" element={<OneCocktailPage />} />
         <Route path="/*" element={<h2>No page exist</h2>} />
       </Routes>
       <ToastContainer />
