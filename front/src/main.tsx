@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { addInteceptors } from './axiosApi.ts';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GOOGLE_CLIENT_ID } from './GlobalConstant.ts';
+import './i18n'
 
 addInteceptors(store);
 

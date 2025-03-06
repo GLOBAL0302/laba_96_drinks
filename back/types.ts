@@ -6,4 +6,5 @@ export interface IUserField {
   role: string;
   token: string;
   googleId: string;
+  __confirmPassword: string;
 }

@@ -8,13 +8,23 @@ interface IUserMethods {
   generateToken(): void;
 }
 
+interface UserVirtuals{
+  confirmPassword: string;
+}
+
 type UserModel = Model<IUserField, {}, IUserMethods>;
 
 const regEmail = /^(\w+[-.]?\w+)@(\w+)([.-]?\w+)?(\.[a-zA-Z]{2,3})$/;
 const Schema = mongoose.Schema;
 const SALT_WORK_FACTORY = 10;
 
-const UserSchema = new Schema<HydratedDocument<IUserField>, UserModel, IUserMethods>({
+const UserSchema = new Schema<
+    HydratedDocument<IUserField>,
+  UserModel,
+  IUserMethods,
+    {},
+    UserVirtuals
+>({
   email: {
     type: String,
     required: true,
@@ -53,7 +63,29 @@ const UserSchema = new Schema<HydratedDocument<IUserField>, UserModel, IUserMeth
     required: [true, 'Token is required'],
   },
   googleId: String,
+},
+  {
+    virtuals:{
+      confirmPassword:{
+        get(){
+          return this.__confirmPassword;
+        },
+        set(confirmPassword:string){
+          this.__confirmPassword =  confirmPassword;
+        }
+      }
+    }
+  })
+;
+
+UserSchema.path('password').validate(function(value){
+  if(!this.isModified('password')) return
+  if(value !== this.confirmPassword){
+    this.invalidate('password', 'Passwords must match');
+    this.invalidate("confirmPassword", 'Passwords must match');
+  }
 });
+
 
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();

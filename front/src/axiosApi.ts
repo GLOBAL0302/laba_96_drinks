@@ -13,7 +13,6 @@ export const addInteceptors = (store: Store<RootState>) => {
     const headers = config.headers as AxiosHeaders;
     headers.set('Authorization', token);
 
-    console.log(token);
     return config;
   });
 };

@@ -5,7 +5,7 @@ import { fetchAllCocktailsThunk } from './cocktailsThunk.ts';
 import { selectCocktails } from './cocktailsSlice.ts';
 import Cocktail from './Cocktail.tsx';
 import { selectUser } from '../Users/usersSlice.ts';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 
 const Cocktails = () => {
   const dispatch = useAppDispatch();
