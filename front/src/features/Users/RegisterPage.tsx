@@ -14,6 +14,7 @@ const initialState = {
   email: '',
   password: '',
   displayName: '',
+  confirmPassword: '',
   avatar: null,
 };
 
@@ -118,6 +119,7 @@ const RegisterPage = () => {
                   helperText={getFieldError('displayName')}
                 />
               </Grid2>
+
               <Grid2 size={12}>
                 <TextField
                   onChange={handleChange}
@@ -129,6 +131,19 @@ const RegisterPage = () => {
                   id="password"
                   error={Boolean(getFieldError('password'))}
                   helperText={getFieldError('password')}
+                />
+              </Grid2>
+              <Grid2 size={12}>
+                <TextField
+                  onChange={handleChange}
+                  value={userForm.confirmPassword}
+                  name="confirmPassword"
+                  fullWidth
+                  type="password"
+                  id="confirmPassword"
+                  label="confirm Password"
+                  error={Boolean(getFieldError('confirmPassword'))}
+                  helperText={getFieldError('confirmPassword')}
                 />
               </Grid2>
               <Grid2>

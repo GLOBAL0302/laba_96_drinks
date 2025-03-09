@@ -34,10 +34,12 @@ usersRouter.post('/google', async (req, res, next) => {
     let user = await User.findOne({ googleId: id });
 
     if (!user) {
+      const newPassword = crypto.randomUUID();
       user = new User({
         email: email,
-        password: crypto.randomUUID(),
+        password: newPassword,
         googleId: id,
+        confirmPassword:newPassword,
         role: 'user',
         displayName,
         avatar,
@@ -68,6 +70,7 @@ usersRouter.post(
         avatar: req.file ? 'images' + req.file.filename : null,
         password: req.body.password,
         role: 'user',
+        confirmPassword:req.body.confirmPassword,
       });
 
       user.generateToken();

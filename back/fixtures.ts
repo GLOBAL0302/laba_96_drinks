@@ -18,6 +18,7 @@ const run = async () => {
     {
       email: 'admin@gmail.com',
       password: '123',
+      confirmPassword: '123',
       displayName: 'Admin',
       avatar: 'fixtures/admin.jpg',
       role: 'admin',
@@ -26,6 +27,7 @@ const run = async () => {
     {
       email: 'user@gmail.com',
       password: '123',
+      confirmPassword: '123',
       displayName: 'user',
       avatar: 'fixtures/user.png',
       role: 'user',

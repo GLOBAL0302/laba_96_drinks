@@ -20,6 +20,7 @@ export interface IRegisterMutation {
   password: string;
   avatar: string | null;
   displayName: string;
+  confirmPassword:string
 }
 
 export interface ILoginMutation {
